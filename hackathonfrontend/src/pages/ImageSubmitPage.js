@@ -1,8 +1,10 @@
 import { Box, Button } from "@mui/material";
 import { useState } from "react";
+import { sendImageToServer } from "../routes/imageTransport";
 
 export default function ImageSubmitPage() {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [location, setLocation] = useState('')
   return (
     <Box
       style={{
@@ -22,10 +24,12 @@ export default function ImageSubmitPage() {
         <input
           type="file"
           hidden
-          onChange={(event) => {
-            console.log(event)
-            console.log(event.target.files[0]); // Log the selected file
+          onChange={async (event) => {       
             setSelectedImage(event.target.files[0]); // Update the state with the selected file
+            const formData = new FormData();
+            formData.append("image", event.target.files[0]);
+            const detectedLocation = await sendImageToServer(formData);
+            setLocation(detectedLocation);
           }}
         />
       </Button>
@@ -37,6 +41,9 @@ export default function ImageSubmitPage() {
             width={"250px"}
             src={URL.createObjectURL(selectedImage)}
           />
+          {location && (
+            <h1>{location}</h1>
+          )}
           <br /> <br />
           {/* Button to remove the selected image */}
           <button onClick={() => setSelectedImage(null)}>Remove</button>

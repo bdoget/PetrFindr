@@ -43,7 +43,10 @@ def do_backend(imgName):
     scores = dict()
     for i in range(len(imgList)):
         scores[i] = siftSim.calculate_score_back_end(i,kp,desc)
-    return max(scores, key=lambda x:scores[x])
+    
+    indexMax = max(scores, key=lambda x:scores[x])
+
+    return imgList[indexMax]
 
 
 

@@ -1,10 +1,13 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from PIL import Image
 import io
 import os
 import compare
+import re
 
 app = Flask(__name__)
+CORS(app)
 
 # Define the upload folder
 UPLOAD_FOLDER = 'uploads'
@@ -28,10 +31,13 @@ def process_image():
         image_file.save(file_path)
         
         ans = compare.do_backend(file_path)
-        ans = ans.file_name.rsplit('.', 1)[0] # stripping .txt
+        ans = ans.rsplit('_', 1)[0] # stripping .txt
 
 
-        processed_text = ans
+        # def add_space_before_capitals(text):
+        #     return re.sub(r'(?<!^)([A-Z])', r' \1', text)
+
+        processed_text = re.sub(r'(?<!^)([A-Z])', r' \1', ans)
         os.remove(file_path)        # Clean up the saved image file
 
         return jsonify({"message": processed_text})     # Send the processed text back as a response
