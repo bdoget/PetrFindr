@@ -6,7 +6,7 @@ app = Flask(__name__)
 def index():
     # Default location (I set the middle of Aldrich Park)
     default_location = {"lat": 33.6461292, "lng": -117.8426521}
-    return render_template("./PetrFindr/template/index.html", location=default_location)
+    return render_template("./index.html", location=default_location)
 
 @app.route("/get_sample_location", methods=["GET"])
 def get_sample_location():
