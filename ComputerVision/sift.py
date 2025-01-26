@@ -27,21 +27,11 @@ def process_images(dir, images):
 
 def main():
     dir = "data/images"
-    imgList = get_image_filenames("data/images")
-    # print("Images found:\n" + "".join(f"{img}\n" for img in imageList),end = "")
-    imagesBW = process_images(dir, imgList)
-    # print(len(imagesBW))
+    imgList = get_image_filenames(dir)          # print("Images found:\n" + "".join(f"{img}\n" for img in imageList),end = "")
+    imagesBW = process_images(dir, imgList)     # print(len(imagesBW))
     
     siftSim = SiftSimilarity(imgList,imagesBW)
     keypoints, descriptors = siftSim.generate_keypoints_desc()
-
-    scores = dict()
-    for i in range(len(imgList)):
-        scores[i] = siftSim.calculate_results_for(0,i)
     
-    print([imgList[i] for i in sorted(scores,key=lambda x:scores[x])])
-    print(imgList)
-    print(scores)
-
 if __name__ == "__main__":
     main()

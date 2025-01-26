@@ -105,11 +105,22 @@ class SiftSimilarity:
         matches = self.calculate_matches(desc1, desc2)
         score = self.calculate_score(matches, len(kp1), len(kp2))
 
-        image1 = image_resize_test(cv2.imread(f"data/images/{self.image_list[i]}"))
-        image2 = image_resize_test(cv2.imread(f"data/images/{self.image_list[j]}"))
+        # image1 = image_resize_test(cv2.imread(f"data/images/{self.image_list[i]}"))
+        # image2 = image_resize_test(cv2.imread(f"data/images/{self.image_list[j]}"))
 
-        plot = self.get_plot(image1, image2, kp1, kp2, matches)
-        plt.imshow(plot)
-        plt.show()
-
+        # plot = self.get_plot(image1, image2, kp1, kp2, matches)
+        # plt.imshow(plot)
+        # plt.show()
         return score
+    
+    def calculate_score_back_end(self, i, kp, desc):
+        kp1 = self.fetch_keypoints(i)
+        desc1 = self.fetch_descriptors(i)
+
+        matches = self.calculate_matches(desc1, desc)
+        score = self.calculate_score(matches, len(kp1), len(kp))
+        return score
+
+    def generate_keypoints_desc_back_end(self, image):
+        kp, desc = self.compute_sift(image)
+        return kp, desc
