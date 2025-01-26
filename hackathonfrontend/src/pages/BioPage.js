@@ -1,9 +1,9 @@
 import { Box, Grid2, Card, CardContent, Button } from "@mui/material";
 import BioCard from "../components/BioCard";
-import blo from "../assets/pikachu.png";
-import qian from "../assets/pikachu.png";
+import blo from "../assets/blo.jpg";
+import qian from "../assets/ying.jpg";
 import justin from "../assets/justin.png";
-import bh from "../assets/pikachu.png";
+import bh from "../assets/bhj.jpg";
 import { Typography } from "@mui/material/";
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
@@ -23,21 +23,21 @@ export default function BioPage() {
       name: "Ying Wong",
       age: 22,
       major: "Cognitive Sciences",
-      info: "I like racism. My strong interest in project management is reflected in my ability to thrive in collaborative environments. My goal is to build a career as an AI solutions architect in the game industry, merging my expertise in AI with my passion for gaming while continuing to develop my project management skills in dynamic team settings.",
+      info: "My strong interest in project management is reflected in my ability to thrive in collaborative environments. My goal is to build a career as an AI solutions architect in the game industry, merging my expertise in AI with my passion for gaming while continuing to develop my project management skills in dynamic team settings.",
     },
     {
       pic: justin,
       name: "Justin Lo",
       age: 19,
       major: "Computer Engineering",
-      info: "I am single- pls hmu @jus10lo",
+      info: "I am ambitious in my studies of physical and electrical components of computers. I'm looking forwards to building my skills as a hardware engineer by learning how to create and integrate software within my projects.",
     },
     {
       pic: bh,
       name: "Brandon Huynh",
       age: 21,
       major: "Computer Science",
-      info: "I like men with knives. I have extensive programming experience in machine learning projects and have worked on several large-scale projects on cross-functional teams involving designers and product-managers in AGILE environments.",
+      info: "I have extensive programming experience in machine learning projects and have worked on several large-scale projects on cross-functional teams involving designers and product-managers in AGILE environments.",
     },
   ];
   return (
@@ -50,8 +50,8 @@ export default function BioPage() {
         backgroundColor: "lightblue", // Change background color here
       }}
     >
-      <h1>About Us</h1>
-      <Typography variant="h3" sx={{fontSize: "30px", paddingLeft: "20px"}}>About Us</Typography>
+      
+      <Typography variant="h1" sx={{fontSize: "30px", paddingTop: "2%", paddingLeft: "2%", paddingBottom: "2%"}}>About Us</Typography>
       
       <Grid2
         container
