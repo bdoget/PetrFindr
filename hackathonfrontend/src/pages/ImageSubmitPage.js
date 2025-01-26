@@ -26,10 +26,10 @@ export default function ImageSubmitPage() {
           hidden
           onChange={async (event) => {       
             setSelectedImage(event.target.files[0]); // Update the state with the selected file
-            const formData = new FormData();
-            formData.append("image", event.target.files[0]);
-            const detectedLocation = await sendImageToServer(formData);
-            setLocation(detectedLocation);
+            // const formData = new FormData();
+            // formData.append("image", event.target.files[0]);
+            // const detectedLocation = await sendImageToServer(formData);
+            // setLocation(detectedLocation);
           }}
         />
       </Button>

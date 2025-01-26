@@ -1,5 +1,6 @@
 import requests
 import os
+from shhh import API_KEY
 
 def fetch_streetview_image(location, heading, fov, pitch, size, api_key, output_dir, filename):
     base_url = "https://maps.googleapis.com/maps/api/streetview"
@@ -24,7 +25,7 @@ def fetch_streetview_image(location, heading, fov, pitch, size, api_key, output_
         print(f"Error: {response.status_code} - {response.reason}")
 
 if __name__ == "__main__":
-    API_KEY = "AIzaSyDMK5b6iXrm72bIaK7alBOFOr0S7n-LIiY"
+    API_KEY = API_KEY
     LOCATION = "33.648705420569435, -117.84248843393041"  # DD coordinates
     HEADING = [0, 45, 90, 135, 180]
     FOV = 80  # field of view

@@ -3,3 +3,5 @@ temp.py
 *.copy
 data-test1/
 
+# sensitive info
+shhh.py

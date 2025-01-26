@@ -1,8 +1,9 @@
 import os
 import requests
-# from UCIGrid import uci_grid
+from UCIGrid import uci_grid
+from shhh import API_KEY
 
-API_KEY = "AIzaSyDMK5b6iXrm72bIaK7alBOFOr0S7n-LIiY"
+API_KEY = API_KEY
 BASE_URL = "https://maps.googleapis.com/maps/api/streetview"
 
 def fetch_images_for_grid(grid, output_dir, 
@@ -32,9 +33,9 @@ def fetch_images_for_grid(grid, output_dir,
             else:
                 print(f"Failed to fetch image for {lat}, {lng} (heading {heading})")
 
-test_grid = [
-    (33.64686570400261, -117.84192695425821),  # Justin's Location
-]
+# test_grid = [
+#     (33.64686570400261, -117.84192695425821),  # Justin's Location
+# ]
 
 output_directory = "./GojoShrineLocation"
-fetch_images_for_grid(test_grid, output_directory)
+fetch_images_for_grid(uci_grid, output_directory)
