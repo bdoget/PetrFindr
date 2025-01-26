@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Maps with Directions</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMK5b6iXrm72bIaK7alBOFOr0S7n-LIiY"></script>
+  <style>
+    #map {
+      height: 90vh;
+      width: 100%;
+    }
+
+    .button-container {
+      margin: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div class="button-container">
+    <button onclick="getDirections()">Get Directions to Sample Location</button>
+  </div>
+
+  <script>
+    let map;
+    let directionsService;
+    let directionsRenderer;
+
+    // Initialize the map and set up directions services
+    function initMap() {
+      const defaultLocation = JSON.parse('{{ location | tojson | safe }}'); // Starting location (e.g., Aldrich Park)
+
+      // Create the map centered at the default location
+      map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 16,
+        center: defaultLocation,
+      });
+
+      // Initialize Directions Service and Renderer
+      directionsService = new google.maps.DirectionsService();
+      directionsRenderer = new google.maps.DirectionsRenderer();
+      directionsRenderer.setMap(map);
+
+      // Add a marker at the default location
+      new google.maps.Marker({
+        position: defaultLocation,
+        map: map,
+        title: "Default Location (Aldrich Park)",
+      });
+    }
+
+    // Fetch sample location from backend and get directions
+    async function getDirections() {
+      try {
+        // Fetch the sample location from your backend
+        const response = await fetch("/get_sample_location");
+        if (!response.ok) {
+          throw new Error("Failed to fetch sample location");
+        }
+
+        const data = await response.json();
+        const start = JSON.parse('{{ location | tojson | safe }}'); // Starting location (default)
+        const end = { lat: data.lat, lng: data.lng }; // Ending location (sample)
+
+        // Request directions from the Google Maps Directions API
+        directionsService.route(
+          {
+            origin: start,
+            destination: end,
+            travelMode: "WALKING", // Change to "DRIVING", "BICYCLING", or "TRANSIT" if needed
+          },
+          (result, status) => {
+            if (status === "OK") {
+              // Render the directions on the map
+              directionsRenderer.setDirections(result);
+            } else {
+              alert("Directions request failed due to: " + status);
+            }
+          }
+        );
+      } catch (error) {
+        console.error("Error fetching directions:", error);
+        alert("Failed to get directions.");
+      }
+    }
+
+    // Initialize the map when the page loads
+    window.onload = initMap;
+  </script>
+</body>
+</html>
+
